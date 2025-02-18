@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selina Bot | Premium Discord Experience</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --bg-color: #0a0b0e;
+            --card-bg: #1a1b1f;
+            --accent: #5865F2;
+            --accent-hover: #4752c4;
+            --text: #ffffff;
+            --secondary: #b9bbbe;
+            --success: #57F287;
+            --warning: #FEE75C;
+            --error: #ED4245;
+            --gradient: linear-gradient(135deg, #5865F2, #8B5CF6);
+            --gradient-hover: linear-gradient(135deg, #4752c4, #7b4ee4);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0.1;
+            border-radius: 20px;
+            z-index: -1;
+        }
+
+        .bot-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            border: 4px solid var(--accent);
+            box-shadow: 0 0 30px rgba(88, 101, 242, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .bot-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(88, 101, 242, 0.4);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+        }
+
+        .invite-button {
+            background: var(--gradient);
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .invite-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .invite-button:hover::before {
+            transform: translateX(0);
+        }
+
+        .invite-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(88, 101, 242, 0.3);
+        }
+
+        .section {
+            margin: 4rem 0;
+            padding: 2.5rem;
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 3px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .card:hover::before {
+            opacity: 0.05;
+        }
+
+        .card h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .support-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .support-link {
+            color: var(--secondary);
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .support-link:hover {
+            border-color: var(--accent);
+            color: var(--text);
+            background: rgba(88, 101, 242, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .testimonial-author {
+            margin-top: 1rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(87, 242, 135, 0.1);
+            color: var(--success);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .status-badge i {
+            font-size: 0.8rem;
+        }
+
+        .background-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--gradient);
+            opacity: 0.1;
+            filter: blur(60px);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .circle-1 {
+            width: 400px;
+            height: 400px;
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .circle-2 {
+            width: 300px;
+            height: 300px;
+            bottom: -50px;
+            right: -50px;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(50px, 50px);
+            }
+            50% {
+                transform: translate(0, 100px);
+            }
+            75% {
+                transform: translate(-50px, 50px);
+            }
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 11, 14, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.8rem 0;
+            background: rgba(10, 11, 14, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .nav-logo img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: var(--text);
+        }
+
+        .nav-link.primary {
+            background: var(--gradient);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            color: white;
+        }
+
+        .nav-link.primary:hover {
+            background: var(--gradient-hover);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: var(--glass-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+
+        .feature-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .command-preview {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            font-family: 'Monaco', monospace;
+        }
+
+        .command-line {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .prefix {
+            color: var(--accent);
+        }
+
+        .command {
+            color: var(--text);
+        }
+
+        .response {
+            color: var(--secondary);
+            margin-left: 1.5rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pricing-card {
+            background: var(--glass-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(to bottom, var(--glass-bg), rgba(88, 101, 242, 0.1));
+            border-color: var(--accent);
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text);
+            margin: 1rem 0;
+        }
+
+        .price-period {
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        .feature-list {
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .feature-item i {
+            color: var(--success);
+        }
+
+        .demo-container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-messages {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .message {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: messageAppear 0.5s forwards;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient);
+            flex-shrink: 0;
+        }
+
+        .message-content {
+            background: var(--glass-bg);
+            padding: 1rem;
+            border-radius: 12px;
+            max-width: 80%;
+        }
+
+        .message-author {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        @keyframes messageAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+            background: var(--glass-bg);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-icon {
+            position: absolute;
+            right: -20px;
+            bottom: -20px;
+            font-size: 8rem;
+            opacity: 0.05;
+            transform: rotate(-15deg);
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin-top: 0.5rem;
+        }
+
+        .footer {
+            margin-top: 6rem;
+            padding: 4rem 0;
+            background: var(--card-bg);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--text);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .footer-link {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--text);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .support-links {
+                justify-content: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @keyframes countUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .animate-stat {
+            animation: countUp 1s ease forwards;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .loading {
+            animation: pulse 1.5s infinite;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-hover);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="floating-circle circle-1"></div>
+        <div class="floating-circle circle-2"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <img src="a7d8ae84b67c6597558c5aaa147bcc61.webp" alt="Bot Logo">
+                <span>Selina</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features" class="nav-link">Features</a>
+                <!-- <a href="#commands" class="nav-link">Commands</a> -->
+                <!-- <a href="#pricing" class="nav-link">Pricing</a> -->
+                <a href="#support" class="nav-link">Support</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=1303374162533941331" class="nav-link primary" target="_blank">Add to Discord</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="header">
+            <img src="a7d8ae84b67c6597558c5aaa147bcc61.webp" alt="AI Bot" class="bot-avatar">
+            <h1>Next-Gen Selina</h1>
+            <p>Transform your Discord server with powerful AI capabilities</p>
+            <div class="cta-buttons">
+                <a href="#" id="inviteLink" class="invite-button">
+                    <i class="fas fa-robot"></i>
+                    <span>Add to Discord</span>
+                </a>
+                <!-- <a href="#demo" class="secondary-button">
+                    <i class="fas fa-play"></i>
+                    <span>Watch Demo</span>
+                </a> -->
+            </div>
+            <div class="status-badge">
+                <i class="fas fa-circle"></i>
+                <span>99.9% Uptime</span>
+            </div>
+        </header>
+
+        <section class="section">
+            <h2>Key Features</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3><i class="fas fa-brain"></i> AI Chat (Under work)</h3>
+                    <p>Engage in natural conversations powered by state-of-the-art AI models. Get instant responses, creative writing, and helpful assistance.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-shield-alt"></i> Smart Moderation</h3>
+                    <p>Keep your server safe with AI-powered content filtering, automated moderation tools, and customizable security settings.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-music"></i> Premium Audio (Soon)</h3>
+                    <p>Enjoy high-quality music playback with support for multiple platforms, playlists, and advanced audio controls.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="section fade-in">
+            <h2>Advanced Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Natural Language AI</h3>
+                    <p>State-of-the-art AI model that understands context, nuance, and can engage in meaningful conversations.</p>
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Context-aware responses</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Multi-language support</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Custom personality settings</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Intelligent Moderation</h3>
+                    <p>Keep your server safe with AI-powered content filtering and automated moderation tools.</p>
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Auto-content filtering</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Raid protection</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Custom rule enforcement</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3>Premium Audio</h3>
+                    <p>Crystal-clear music playback with advanced audio controls and playlist management.</p>
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>High-quality streaming</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Smart queue system</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Lyrics integration</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Live Statistics</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="stat-number" id="serversCount">0</div>
+                    <p>Active Servers</p>
+                </div>
+                <div class="card">
+                    <div class="stat-number" id="usersCount">0</div>
+                    <p>Total Users</p>
+                </div>
+                <div class="card">
+                    <div class="stat-number" id="uptimeCount">99.9</div>
+                    <p>Uptime Percentage</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- <section id="demo" class="section fade-in">
+            <h2>See it in Action</h2>
+            <div class="demo-container">
+                <div class="demo-messages" id="demoChat">
+                    Messages will be added dynamically
+                </div>
+                <div class="demo-input">
+                    <input type="text" placeholder="Try a command..." class="demo-command-input">
+                    <button class="demo-send-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- <section id="pricing" class="section fade-in">
+            <h2>Choose Your Plan</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Free</h3>
+                    <div class="price">$0</div>
+                    <div class="price-period">forever</div>
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Basic AI responses</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Standard moderation</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Basic music features</span>
+                        </li>
+                    </ul>
+                    <button class="pricing-btn">Get Started</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="featured-badge">Most Popular</div>
+                    <h3>Pro</h3>
+                    <div class="price">$9.99</div>
+                    <div class="price-period">per month</div>
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Advanced AI capabilities</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Premium moderation tools</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>High-quality music</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Priority support</span>
+                        </li>
+                    </ul>
+                    <button class="pricing-btn featured">Upgrade Now</button>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">Custom</div>
+                    <div class="price-period">contact us</div>
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Custom AI training</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Dedicated support</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>SLA guarantee</span>
+                        </li>
+                    </ul>
+                    <button class="pricing-btn">Contact Sales</button>
+                </div>
+            </div>
+        </section> -->
+
+        <section class="section">
+            <h2>Community & Support</h2>
+            <p>Join our vibrant community and get help from our dedicated support team</p>
+            <div class="support-links">
+                <a href="https://discord.com/invite/F8ekFRzRaN" class="support-link" target="_blank">
+                    <i class="fab fa-discord"></i>
+                    <span>Join Support Server</span>
+                </a>
+                <!-- <a href="#" class="support-link">
+                    <i class="fas fa-book"></i>
+                    <span>Documentation</span>
+                </a>
+                <a href="#" class="support-link">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a> -->
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>User Testimonials</h2>
+            <div class="grid">
+                <div class="card">
+                    <p>"The AI capabilities are mind-blowing! It's like having a smart assistant that understands context and provides meaningful responses."</p>
+                    <p class="testimonial-author">- Sarah K., Community Manager</p>
+                </div>
+                <div class="card">
+                    <p>"The moderation features have made managing our 50k+ member server so much easier. Highly recommended for any growing community!"</p>
+                    <p class="testimonial-author">- Mike R., Server Owner</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Selina</h3>
+                    <p>Transforming Discord communities with advanced AI technology.</p>
+                    <div class="social-links">
+                        <a href="https://discord.com/invite/F8ekFRzRaN" class="social-link" target="_blank"><i class="fab fa-discord"></i></a>
+                        <!-- <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a> -->
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="#features" class="footer-link">Features</a>
+                        <!-- <a href="#pricing" class="footer-link">Pricing</a> -->
+                        <a href="#support" class="footer-link">Support</a>
+                        <!-- <a href="#" class="footer-link">Terms of Service</a> -->
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <div class="footer-links">
+                        <!-- <a href="#" class="footer-link">Documentation</a> -->
+                        <!-- <a href="#" class="footer-link">API Reference</a> -->
+                        <a href="#" class="footer-link">Status</a>
+                        <!-- <a href="#" class="footer-link">Blog</a> -->
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Bot Configuration
+        const botConfig = {
+            clientId: '1303374162533941331',
+            permissions: '412384244736',
+            inviteURL: 'https://discord.com/oauth2/authorize'
+        };
+
+        // Set invite link
+        document.getElementById('inviteLink').href = botConfig.inviteURL;
+
+        // Improved statistics animation
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                obj.textContent = value.toLocaleString() + (obj.id === 'uptimeCount' ? '%' : '+');
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    obj.classList.add('animate-stat');
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Intersection Observer for animation triggers
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.id === 'serversCount') {
+                        animateValue(entry.target, 0, 2, 2000);
+                    } else if (entry.target.id === 'usersCount') {
+                        animateValue(entry.target, 0, 60, 2000);
+                    } else if (entry.target.id === 'uptimeCount') {
+                        animateValue(entry.target, 0, 99.9, 1500);
+                    }
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Observe statistics elements
+        document.querySelectorAll('.stat-number').forEach(stat => {
+            statsObserver.observe(stat);
+        });
+
+        // Scroll Animation
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            scrollObserver.observe(element);
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Demo Chat Functionality
+        const demoChat = document.getElementById('demoChat');
+        const demoMessages = [
+            { author: 'User', content: '/help' },
+            { author: 'Selina', content: 'Here are my main commands:\n• /chat - Start a conversation\n• /play - Play music\n• /moderate - Moderation settings' },
+            { author: 'User', content: '/chat What can you do?' },
+            { author: 'Selina', content: 'I can help with various tasks:\n• Natural conversations\n• Answer questions\n• Moderate content\n• Play music\n• And much more!' }
+        ];
+
+        function addMessage(message, delay = 0) {
+            setTimeout(() => {
+                const messageElement = document.createElement('div');
+                messageElement.className = 'message';
+                messageElement.innerHTML = `
+                    <div class="message-avatar"></div>
+                    <div class="message-content">
+                        <div class="message-author">${message.author}</div>
+                        <div class="message-text">${message.content}</div>
+                    </div>
+                `;
+                demoChat.appendChild(messageElement);
+                demoChat.scrollTop = demoChat.scrollHeight;
+            }, delay);
+        }
+
+        // Animate demo messages
+        let delay = 0;
+        demoMessages.forEach(message => {
+            addMessage(message, delay);
+            delay += 1000;
+        });
+    </script>
+</body>
+</html>
