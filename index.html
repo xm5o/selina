@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selina Bot | Premium Discord Experience</title>
+    <title>Selina | Discord Bot</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -407,6 +407,7 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .feature-card::before {
@@ -825,6 +826,28 @@
             <div class="feature-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Fortnite management</h3>
+                    <p>Watch your stats and news and check fortnite server status anytime.</p>
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Servers Status</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Live News</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Player stats</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- <div class="feature-card">
+                    <div class="feature-icon">
                         <i class="fas fa-brain"></i>
                     </div>
                     <h3>Natural Language AI</h3>
@@ -843,9 +866,17 @@
                             <span>Custom personality settings</span>
                         </li>
                     </ul>
-                </div>
+                </div> -->
 
                 <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Secret Feature</h3>
+                    <p>Coming soon...</p>
+                </div>
+
+                <!-- <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
@@ -865,9 +896,17 @@
                             <span>Custom rule enforcement</span>
                         </li>
                     </ul>
-                </div>
+                </div> -->
 
                 <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Secret Feature</h3>
+                    <p>Coming soon...</p>
+                </div>
+
+                <!-- <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-music"></i>
                     </div>
@@ -887,7 +926,7 @@
                             <span>Lyrics integration</span>
                         </li>
                     </ul>
-                </div>
+                </div> -->
             </div>
         </section>
 
@@ -1016,7 +1055,7 @@
             </div>
         </section>
 
-        <section class="section">
+        <!-- <section class="section">
             <h2>User Testimonials</h2>
             <div class="grid">
                 <div class="card">
@@ -1028,7 +1067,7 @@
                     <p class="testimonial-author">- Mike R., Server Owner</p>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <footer class="footer">
             <div class="footer-grid">
@@ -1069,8 +1108,8 @@
         // Bot Configuration
         const botConfig = {
             clientId: '1303374162533941331',
-            permissions: '412384244736',
-            inviteURL: 'https://discord.com/oauth2/authorize'
+            // permissions: '412384244736',
+            inviteURL: 'https://discord.com/oauth2/authorize?client_id=1303374162533941331'
         };
 
         // Set invite link
